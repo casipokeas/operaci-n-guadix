@@ -1,0 +1,427 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Carta de Misión TPC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+/* Concepto: mesa de espía con collage de cómic. Un sobre kraft sellado en el centro;
+   al pincharlo se abre y la carta de la misión se despliega a pantalla completa. */
+:root {
+  --ink: #15110f;
+  --kraft: #d6b27a;
+  --kraft-dark: #b98f55;
+  --paper: #f2e9d4;
+  --blood: #8e1b12;
+  --teal: #2a8079;
+  --sun: #f3c331;
+  --coral: #e5502f;
+  --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --type: "Special Elite", "Courier New", monospace;
+  --hand: "Caveat", "Segoe Print", cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--type);
+  padding-block: 20px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+.stage {
+  position: relative;
+  min-height: calc(100vh - 40px);
+  min-height: calc(100dvh - 40px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  isolation: isolate;
+}
+.stage::before {
+  content: ""; position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(42,128,121,.65), transparent 38%),
+    radial-gradient(circle at 92% 88%, rgba(229,80,47,.55), transparent 40%),
+    radial-gradient(circle at 85% 8%, rgba(243,195,49,.28), transparent 30%),
+    radial-gradient(rgba(255,255,255,.09) 1.6px, transparent 1.8px) 0 0 / 15px 15px,
+    var(--ink);
+}
+.bolt { position: absolute; z-index: -1; width: 70px; opacity: .9; }
+.bolt.a { left: 2%; bottom: 8%; transform: rotate(-12deg); }
+.bolt.b { right: 3%; top: 6%; transform: rotate(14deg) scale(.8); }
+
+.head { text-align: center; display: grid; gap: 10px; justify-items: center; }
+.head h1 {
+  margin: 0; font-family: var(--display); font-weight: 400;
+  font-size: clamp(3.4rem, 15vw, 7rem); line-height: .9; letter-spacing: .02em;
+  color: var(--kraft);
+  text-shadow: 4px 4px 0 var(--blood);
+}
+.strip {
+  background: var(--blood); color: var(--paper);
+  padding: 6px 22px; font-size: 1.05rem; letter-spacing: .06em;
+  transform: rotate(-1.5deg);
+  clip-path: polygon(0 12%, 4% 0, 100% 6%, 97% 100%, 3% 92%);
+}
+
+/* ---------- Sobre ---------- */
+.envelope-btn {
+  all: unset; cursor: pointer; display: block;
+  width: min(88vw, 540px);
+  padding-top: 18%;
+  perspective: 1400px;
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope-btn:focus-visible { outline: 4px solid var(--sun); outline-offset: 10px; border-radius: 8px; }
+.env {
+  position: relative; width: 100%; aspect-ratio: 3 / 2;
+  filter: drop-shadow(0 22px 24px rgba(0,0,0,.6));
+  animation: bob 3.2s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-9px) rotate(1deg); } }
+.envelope-btn:hover .env { animation-play-state: paused; transform: scale(1.03) rotate(0); }
+.env-back { position: absolute; inset: 0; background: var(--kraft-dark); border-radius: 5px; }
+.peek {
+  position: absolute; left: 7%; right: 7%; top: 5%; bottom: 8%;
+  background: var(--paper); border-radius: 3px; padding: 7% 8%;
+  transition: transform .8s cubic-bezier(.3,.8,.3,1) .45s;
+  z-index: 1;
+  font-family: var(--hand); font-weight: 700; color: var(--blood);
+  font-size: clamp(1.1rem, 4vw, 1.7rem); line-height: 1.1;
+}
+.pocket { position: absolute; inset: 0; z-index: 3; }
+.pocket i { position: absolute; inset: 0; display: block; }
+.pocket .l { background: #c79d62; clip-path: polygon(0 0, 52% 54%, 0 100%); }
+.pocket .r { background: #c39858; clip-path: polygon(100% 0, 48% 54%, 100% 100%); }
+.pocket .b { background: var(--kraft); clip-path: polygon(0 100%, 50% 46%, 100% 100%); }
+.label {
+  position: absolute; left: 50%; bottom: 11%; transform: translateX(-50%) rotate(-2deg);
+  z-index: 4; background: var(--paper); color: var(--ink);
+  padding: 6px 14px; font-size: clamp(.8rem, 2.8vw, 1.05rem); white-space: nowrap;
+  box-shadow: 2px 3px 0 rgba(0,0,0,.35);
+}
+.flap {
+  position: absolute; top: 0; left: 0; width: 100%; height: 56%;
+  background: linear-gradient(#e0c08c, #cda468);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform .7s cubic-bezier(.5,0,.3,1), z-index 0s .3s;
+  z-index: 5; backface-visibility: visible;
+}
+.seal {
+  position: absolute; left: 50%; top: 52%; width: 17%; aspect-ratio: 1;
+  transform: translate(-50%, -50%); z-index: 6; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c0392b, var(--blood) 70%);
+  box-shadow: 0 3px 6px rgba(0,0,0,.5), inset 0 0 0 4px rgba(0,0,0,.18);
+  display: grid; place-items: center; transition: opacity .3s;
+}
+.seal svg { width: 58%; }
+.stamp-env {
+  position: absolute; z-index: 4; left: 5%; top: 56%; transform: rotate(-14deg);
+  font-family: var(--display); letter-spacing: .08em; font-size: clamp(1rem, 4.4vw, 1.9rem);
+  color: var(--blood); border: 3px solid var(--blood); padding: 0 10px; opacity: .85;
+}
+.sticker {
+  position: absolute; z-index: 7; right: -3%; top: -8%;
+  width: 24%; aspect-ratio: 1; background: var(--sun); color: var(--ink);
+  clip-path: polygon(50% 0,61% 14%,78% 7%,80% 25%,97% 30%,87% 46%,100% 60%,83% 68%,85% 87%,67% 84%,57% 100%,46% 85%,28% 94%,24% 76%,6% 72%,15% 56%,2% 42%,19% 33%,19% 14%,36% 18%);
+  display: grid; place-items: center; text-align: center;
+  font-family: var(--display); font-size: clamp(.7rem, 2.6vw, 1.1rem); line-height: 1; transform: rotate(10deg);
+}
+.hint {
+  display: block; text-align: center; margin-top: 26px;
+  font-family: var(--hand); font-size: clamp(1.5rem, 6vw, 2.2rem); color: var(--sun);
+  animation: blink 1.6s ease-in-out infinite;
+}
+@keyframes blink { 50% { opacity: .45; } }
+
+.stage.opening .env { animation: none; transform: none; }
+.stage.opening .flap { transform: rotateX(180deg); z-index: 1; }
+.stage.opening .seal { opacity: 0; }
+.stage.opening .peek { transform: translateY(-46%); }
+.stage.opening .hint { visibility: hidden; }
+
+/* ---------- Carta ---------- */
+.overlay {
+  position: fixed; inset: 0; z-index: 50; overflow-y: auto; overscroll-behavior: contain;
+  background: rgba(10,8,7,.86);
+  padding-block: max(18px, env(safe-area-inset-top, 0px)) max(30px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(14px, env(safe-area-inset-left, 0px));
+  padding-right: max(14px, env(safe-area-inset-right, 0px));
+  animation: fadein .35s both;
+}
+@keyframes fadein { from { opacity: 0; } }
+.close {
+  position: sticky; top: 0; z-index: 3; display: block; margin: 0 0 10px auto;
+  background: var(--paper); color: var(--ink); border: 0; cursor: pointer;
+  font-family: var(--type); font-size: 1rem; padding: 8px 14px; border-radius: 3px;
+  box-shadow: 3px 3px 0 var(--blood);
+}
+.close:focus-visible, .go:focus-visible { outline: 4px solid var(--sun); outline-offset: 3px; }
+.letter {
+  position: relative; max-width: 680px; margin: 0 auto;
+  background:
+    linear-gradient(90deg, transparent 33%, rgba(0,0,0,.045) 33.2%, transparent 33.6%, transparent 66.4%, rgba(0,0,0,.045) 66.6%, transparent 67%),
+    var(--paper);
+  color: var(--ink);
+  box-shadow: 0 30px 70px rgba(0,0,0,.7);
+  transform-origin: 50% 0;
+  animation: unfold .9s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes unfold { from { transform: translateY(40vh) scale(.55) rotate(-3deg); opacity: .2; } }
+.band {
+  position: relative; background: var(--blood); color: var(--paper);
+  padding: 30px 24px 22px; overflow: hidden;
+}
+.band::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(rgba(255,255,255,.14) 1.6px, transparent 1.8px) 0 0 / 11px 11px; pointer-events: none;
+}
+.conf {
+  display: inline-block; font-family: var(--display); letter-spacing: .14em; font-size: .95rem;
+  border: 2px solid var(--sun); color: var(--sun); padding: 2px 10px; transform: rotate(-3deg);
+}
+.band h2 {
+  position: relative; z-index: 1; margin: 14px 0 0;
+  font-family: var(--display); font-weight: 400; text-wrap: balance;
+  font-size: clamp(2.5rem, 11vw, 4.4rem); line-height: .95; text-transform: uppercase;
+}
+.band h2 em { font-style: normal; color: var(--sun); }
+.body { padding: 26px 24px 34px; display: grid; gap: 26px; }
+.lead { margin: 0; font-size: 1.12rem; line-height: 1.55; max-width: 60ch; }
+.lead b { background: var(--sun); padding: 0 4px; font-weight: 400; }
+h3 {
+  margin: 0; font-family: var(--display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(1.7rem, 7vw, 2.3rem); letter-spacing: .02em; text-wrap: balance;
+}
+.when {
+  display: inline-block; font-family: var(--type); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--ink); color: var(--sun); padding: 4px 10px; margin-top: 8px;
+}
+.steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.step {
+  position: relative; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+  padding: 16px 16px 16px 14px; border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+}
+.step:nth-child(1) { background: var(--sun); transform: rotate(-.6deg); }
+.step:nth-child(2) { background: #7fcfc6; transform: rotate(.5deg); }
+.step:nth-child(3) { background: #f08a6c; transform: rotate(-.4deg); }
+.step .n {
+  font-family: var(--display); font-size: 3.4rem; line-height: .85; color: var(--ink);
+  min-width: 1.1ch; text-align: center;
+}
+.step h4 { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: 1.45rem; text-transform: uppercase; letter-spacing: .03em; }
+.step p { margin: 0; line-height: 1.45; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chip { background: var(--ink); color: var(--sun); font-family: var(--display); letter-spacing: .06em; padding: 3px 10px; font-size: 1.05rem; }
+.week { display: grid; gap: 12px; }
+.week .step { background: var(--paper); border-style: dashed; transform: rotate(.4deg); }
+.final {
+  position: relative; background: var(--ink); color: var(--paper); padding: 22px 20px 24px;
+  display: grid; gap: 14px; overflow: hidden;
+}
+.final::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 100% 0, rgba(42,128,121,.7), transparent 55%), radial-gradient(rgba(255,255,255,.07) 1.5px, transparent 1.7px) 0 0 / 12px 12px;
+}
+.final > * { position: relative; }
+.final h3 { color: var(--sun); }
+.final p { margin: 0; line-height: 1.55; }
+.final .box { display: flex; align-items: center; gap: 16px; }
+.final .box svg { flex: none; width: 84px; }
+.warn {
+  font-family: var(--hand); font-weight: 700; font-size: 1.7rem; line-height: 1.1; color: var(--ink);
+  background: var(--sun); padding: 12px 16px; transform: rotate(-1.2deg); margin-top: 4px;
+}
+.warn small { display: block; font-family: var(--type); font-weight: 400; font-size: .98rem; margin-top: 6px; line-height: 1.4; }
+.remember { display: grid; gap: 10px; }
+.remember ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.remember li {
+  font-family: var(--hand); font-weight: 700; font-size: 1.55rem; line-height: 1.1;
+  padding: 10px 14px; border-left: 8px solid var(--teal); background: rgba(42,128,121,.16);
+}
+.remember li:nth-child(2) { border-color: var(--coral); background: rgba(229,80,47,.16); }
+.remember li:nth-child(3) { border-color: var(--sun); background: rgba(243,195,49,.28); }
+.closing { display: grid; gap: 14px; justify-items: center; text-align: center; padding-top: 6px; }
+.closing p { margin: 0; font-family: var(--display); font-size: clamp(1.6rem, 7vw, 2.2rem); text-transform: uppercase; }
+.go {
+  position: relative; cursor: pointer; border: 3px solid var(--ink); background: var(--blood); color: var(--paper);
+  font-family: var(--display); letter-spacing: .06em; font-size: clamp(1.4rem, 6vw, 2rem); text-transform: uppercase;
+  padding: 14px 26px; box-shadow: 6px 6px 0 var(--ink); transition: transform .12s, box-shadow .12s;
+}
+.go:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--ink); }
+.go:active { transform: translate(4px,4px); box-shadow: 2px 2px 0 var(--ink); }
+.accepted-stamp {
+  display: none; font-family: var(--display); font-size: clamp(2rem, 9vw, 3.4rem); letter-spacing: .08em;
+  color: var(--teal); border: 6px solid var(--teal); padding: 2px 18px; transform: rotate(-6deg); text-transform: uppercase;
+}
+.is-accepted .accepted-stamp { display: block; animation: slam .5s cubic-bezier(.2,1.6,.4,1) both; }
+.is-accepted .go { background: var(--teal); }
+@keyframes slam { from { transform: rotate(-6deg) scale(3); opacity: 0; } }
+
+.rise { animation: rise .6s cubic-bezier(.2,.8,.2,1) both; }
+.rise:nth-child(1) { animation-delay: .5s; } .rise:nth-child(2) { animation-delay: .65s; }
+.rise:nth-child(3) { animation-delay: .8s; } .rise:nth-child(4) { animation-delay: .95s; }
+.rise:nth-child(5) { animation-delay: 1.1s; } .rise:nth-child(6) { animation-delay: 1.25s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
+}
+@media (max-width: 440px) {
+  .body { padding-inline: 16px; } .band { padding-inline: 16px; }
+  .step { grid-template-columns: 1fr; gap: 4px; } .step .n { text-align: left; font-size: 2.8rem; }
+}
+</style>
+
+<main class="stage" id="stage">
+  <svg class="bolt a" viewBox="0 0 60 100" aria-hidden="true"><polygon points="38,0 8,55 28,55 18,100 52,40 32,40" fill="#f3c331"/></svg>
+  <svg class="bolt b" viewBox="0 0 60 100" aria-hidden="true"><polygon points="38,0 8,55 28,55 18,100 52,40 32,40" fill="#e5502f"/></svg>
+
+  <header class="head">
+    <h1>Misión</h1>
+    <span class="strip">Introducción al videojuego</span>
+  </header>
+
+  <button class="envelope-btn" id="open" type="button" aria-label="Abrir la carta de la misión">
+    <div class="env">
+      <div class="env-back"></div>
+      <div class="peek" aria-hidden="true">¡Bienvenido, agente!</div>
+      <div class="pocket" aria-hidden="true"><i class="l"></i><i class="r"></i><i class="b"></i></div>
+      <div class="stamp-env" aria-hidden="true">TOP SECRET</div>
+      <div class="label" aria-hidden="true">PARA: AGENTE · 4 VIERNES</div>
+      <div class="flap" aria-hidden="true"></div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 40 24"><path d="M2 12C8 3 14 1 20 1s12 2 18 11c-6 9-12 11-18 11S8 21 2 12z" fill="#f2e9d4"/><circle cx="20" cy="12" r="6.5" fill="#15110f"/><circle cx="22.5" cy="9.5" r="2" fill="#f2e9d4"/></svg>
+      </div>
+      <div class="sticker" aria-hidden="true">¡ABRE<br>YA!</div>
+    </div>
+    <span class="hint">Pincha para abrir la carta</span>
+  </button>
+</main>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="titulo" hidden>
+  <button class="close" id="close" type="button">Cerrar carta ✕</button>
+  <article class="letter">
+    <header class="band">
+      <span class="conf">CONFIDENCIAL</span>
+      <h2 id="titulo">¡Bienvenido <em>agente!</em></h2>
+    </header>
+
+    <div class="body">
+      <p class="lead rise">Tenemos una misión muy importante para ti. Durante <b>4 viernes</b> te vas a convertir en espía, y un espía necesita hablar y entender español. <b>Las palabras son tu mejor arma.</b></p>
+
+      <section class="rise">
+        <h3>¿Cómo funciona la misión?</h3>
+        <span class="when">Cada viernes de noviembre</span>
+        <ol class="steps" style="margin-top:16px">
+          <li class="step">
+            <span class="n">1</span>
+            <div><h4>Juega</h4><p>Haz las actividades y los juegos del día. Hazlos bien y con atención.</p></div>
+          </li>
+          <li class="step">
+            <span class="n">2</span>
+            <div><h4>Contesta a los formularios</h4><p>Cuando termines las actividades, rellena el formulario.</p></div>
+          </li>
+          <li class="step">
+            <span class="n">3</span>
+            <div>
+              <h4>Completa el checklist</h4>
+              <p>Al terminar el formulario te aparece una lista de minirretos. Si la completas bien, recibirás:</p>
+              <div class="chips"><span class="chip">UNA PALABRA SECRETA</span><span class="chip">UN NÚMERO</span></div>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="week rise">
+        <span class="when" style="justify-self:start">Durante la semana</span>
+        <div class="step">
+          <span class="n">4</span>
+          <div><h4>Haz los mini retos</h4><p>Te damos pequeños retos para practicar español durante la semana. ¡No te olvides!</p></div>
+        </div>
+      </section>
+
+      <section class="final rise">
+        <h3>El gran final</h3>
+        <div class="box">
+          <svg viewBox="0 0 90 80" aria-hidden="true">
+            <rect x="6" y="30" width="78" height="46" rx="3" fill="#b98f55" stroke="#f3c331" stroke-width="3"/>
+            <rect x="6" y="30" width="78" height="14" fill="#8e1b12"/>
+            <path d="M26 30V20a19 19 0 0 1 38 0v10" fill="none" stroke="#f2e9d4" stroke-width="5"/>
+            <rect x="37" y="46" width="16" height="16" rx="2" fill="#f3c331"/>
+            <circle cx="45" cy="52" r="3" fill="#15110f"/><rect x="43.7" y="52" width="2.6" height="7" fill="#15110f"/>
+          </svg>
+          <p>En el último viernes vas a abrir una <b style="color:var(--sun)">CAJA SECRETA</b>. Para abrirla necesitas todos los números que has conseguido en los viernes anteriores.</p>
+        </div>
+        <div class="warn">¡GUÁRDALOS BIEN!
+          <small>Apúntalos en un papel o en tu móvil. Sin los números no completas la misión.</small>
+        </div>
+      </section>
+
+      <section class="remember rise">
+        <h3>Recuerda</h3>
+        <ul>
+          <li>Tu palabra cuenta.</li>
+          <li>Cada palabra que aprendes te hace más fuerte.</li>
+          <li>Cada reto que cumples te acerca al FINAL.</li>
+        </ul>
+      </section>
+
+      <section class="closing rise" id="closing">
+        <p>¿Estás listo, agente?</p>
+        <button class="go" id="go" type="button">¡Empieza la misión!</button>
+        <div class="accepted-stamp" id="accepted" role="status">Misión aceptada</div>
+      </section>
+    </div>
+  </article>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var overlay = document.getElementById('overlay');
+  var openBtn = document.getElementById('open');
+  var closeBtn = document.getElementById('close');
+  var go = document.getElementById('go');
+  var closing = document.getElementById('closing');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer = null;
+
+  function openLetter() {
+    if (stage.classList.contains('opening')) return;
+    stage.classList.add('opening');
+    timer = setTimeout(function () {
+      overlay.hidden = false;
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus({ preventScroll: true });
+    }, reduce ? 0 : 1050);
+  }
+  function closeLetter() {
+    clearTimeout(timer);
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    stage.classList.remove('opening');
+    openBtn.focus({ preventScroll: true });
+  }
+  openBtn.addEventListener('click', openLetter);
+  closeBtn.addEventListener('click', closeLetter);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !overlay.hidden) closeLetter();
+  });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeLetter(); });
+  go.addEventListener('click', function () {
+    closing.classList.add('is-accepted');
+    go.textContent = 'Misión en marcha';
+    overlay.scrollTo({ top: overlay.scrollHeight, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+
+</body></html>
